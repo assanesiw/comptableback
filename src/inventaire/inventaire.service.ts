@@ -32,6 +32,6 @@ export class InventaireService {
   }
 
   async remove(id: string) {
-    return await this.InventaireModel.findByIdAndRemove(id);
+    return await this.InventaireModel.findByIdAndDelete(id);
   }
 }
