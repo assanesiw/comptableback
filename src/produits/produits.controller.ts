@@ -43,8 +43,9 @@ export class ProduitsController {
           .reduce(
             (acc, cur) =>
               acc +
-              cur.find((el) => el.produit._id.toString() === p._id.toString())
-                .qte,
+              cur.find(
+                (el) =>
+                  el.produit && el.produit?._id.toString() === p._id.toString())?.qte ?? 0,
             0,
           );
 
@@ -53,8 +54,8 @@ export class ProduitsController {
           .reduce(
             (acc, cur) =>
               acc +
-              cur.find((el) => el.produit._id.toString() === p._id.toString())
-                .qte,
+              cur.find((el) => el.produit?._id.toString() === p._id.toString())
+                ?.qte ?? 0,
             0,
           );
         const rs = recp - qatt;
