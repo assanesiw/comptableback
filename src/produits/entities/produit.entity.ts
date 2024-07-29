@@ -52,7 +52,7 @@ export class Produit {
   @Prop({ type: String, required: true })
   prixUnitaire: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String })
   observation: string;
 }
 

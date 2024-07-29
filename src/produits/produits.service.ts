@@ -17,7 +17,7 @@ export class ProduitsService {
   }
 
   async findAll(): Promise<Produit[]> {
-    return await this.produitModel.find();
+    return await this.produitModel.find().sort({ createdAt: -1 });
   }
 
   async findOne(id: string) {
