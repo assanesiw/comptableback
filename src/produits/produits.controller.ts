@@ -17,6 +17,7 @@ import { AttributionService } from 'src/attribution/attribution.service';
 import { ReceptionService } from 'src/reception/reception.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { existsSync, unlinkSync } from 'fs';
+import { compareDesc } from 'date-fns';
 
 @Controller('produits')
 export class ProduitsController {
@@ -43,9 +44,11 @@ export class ProduitsController {
           .reduce(
             (acc, cur) =>
               acc +
-              cur.find(
-                (el) =>
-                  el.produit && el.produit?._id.toString() === p._id.toString())?.qte ?? 0,
+                cur.find(
+                  (el) =>
+                    el.produit &&
+                    el.produit?._id.toString() === p._id.toString(),
+                )?.qte ?? 0,
             0,
           );
 
@@ -54,15 +57,17 @@ export class ProduitsController {
           .reduce(
             (acc, cur) =>
               acc +
-              cur.find((el) => el.produit?._id.toString() === p._id.toString())
-                ?.qte ?? 0,
+                cur.find(
+                  (el) => el.produit?._id.toString() === p._id.toString(),
+                )?.qte ?? 0,
             0,
           );
         const rs = recp - qatt;
         return { ...p._doc, quantite: rs };
       }),
     );
-    return o;
+    return o.sort((a, b) => compareDesc(a.date, b.date),
+    );
   }
 
   @Get(':id')
