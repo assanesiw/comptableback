@@ -3,8 +3,12 @@ import { Document } from 'mongoose';
 
 export enum USER_ROLE {
   ADMIN = 'admin',
-  CM = 'cm',
-  CSA = 'csa',
+  Directeur = 'directeur',
+  CM = 'CM',
+  CSA = 'CSA',
+  CSAP = 'CSAP',
+  GES_STOCK = 'GES_STOCK',
+  CONTROLE = 'CONTROLE',
 }
 
 export type UserDocument = User & Document;
@@ -27,6 +31,9 @@ export class User {
 
   @Prop({ type: String, default: USER_ROLE.ADMIN })
   role: string;
+
+  @Prop({ type: Boolean, required: true, default: true })
+  IsActif: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
